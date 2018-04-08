@@ -1,0 +1,229 @@
+I
+
+Task 1
+
+Feature:
+    Checking if after the selection of the programming languages at https://www.codewars.com, user receives programming tasks.
+
+Background:
+    Given there is a user that has access to https://www.codewars.com/
+    And 'programming language courses' are available to choose. 
+    Programming language courses:
+    Clojure, C, C++, C#, Crystal, Dart, Elixir, F#, Go, Haskell, Java, JavaScript, PHP,Python, Ruby, Rust, Shell, SQL, Swift, TypeScript.
+
+Scenario 1:
+    When the https://www.codewars.com/ website is open.
+    Then the selection of programming languages is visible.
+
+Scenario 2:
+    Given the https://www.codewars.com/ website is open.
+    And the selection of programming languages is visible.
+    When I select the JavaScript language.
+    Then the form with JavaScript course appears.
+
+
+Task 2
+
+Feature:
+    Checking if subscribing for the newsletter is possible on the website https://www.doz.pl/.
+
+Background:
+    Given there is a user that has access to https://www.doz.pl/.
+    And fields "Enter email" and "Subscribe me" for sending a newsletter are visible.
+   
+
+Scenario 1:
+    When the website is open.
+    Then fields "Enter email" and "Subscribe me" for sending a newsletter are visible.
+
+Scenario 2:
+    Given the website is open.
+    When I enter the correct email address to the "Enter email" field
+        The Enter email field    |  katarzynasycz@gmail.com 
+    And click the "Subscribe me" field
+    Then "The newsletter is sent" message appears.
+
+Scenario 3:
+    Given the website is open.
+    When I do not enter the email address to the "Enter email" field
+        The Enter email field    |  blank
+    And click the "Subscribe me" field
+    Then "The form contains errors. Check if entered data is correct" message appears.
+
+    
+II 
+
+AC 1, 2 and 3
+
+Feature:
+    Checking if the filtering is available in the courses catalogue at https://www.codecademy.com/.
+
+Background:
+    Given there is a user that has access to https://www.codecademy.com/.
+    Two filtering categories are available
+
+    By subject              | By language
+    Full Catalog            | HTML & CSS
+    Web Development         | Python
+    Programming             | JavaScript
+    Data Science            | Java
+    Partnerships            | SQL
+    Design                  | Bash/Shell
+                            | Ruby
+
+Scenario 1:
+    When the website is open.
+    Then two filtering categories are available: By subject and By language.
+
+    
+Scenario 2: 
+    When the website is open.
+    Then the filtering By subject contains the following categories:
+
+    By subject              
+    Full Catalog            
+    Web Development         
+    Programming            
+    Data Science            
+    Partnerships         
+    Design 
+
+Scenario 3:
+     When the website is open.
+     Then the filtering By subject contains the following categories:
+
+        By language
+        HTML & CSS
+        Python
+        JavaScript
+        Java
+        SQL
+        Bash/Shell
+        Ruby
+
+
+AC 4
+
+Feature:
+    Checking if selecting two filtering categories from subjests is possible at https://www.codecademy.com/.
+
+Background:
+    Given there is a user that has access to https://www.codecademy.com/.
+    Two filtering categories are available.
+
+    By subject              | By language
+    Full Catalog            | HTML & CSS
+    Web Development         | Python
+    Programming             | JavaScript
+    Data Science            | Java
+    Partnerships            | SQL
+    Design                  | Bash/Shell
+                            | Ruby
+
+Scenario outline: Filtering by selecting two options is not possible
+    When the website is open 
+    And I try to select <subject> or <language> and other <subject> or <language> at the same time
+    Then only the second selected option is highlighted - selecting two categories is not possible.
+
+l
+Examples for two subjects: 
+   Subject                  | Subject 
+   Programming              | Data Science
+
+Examples for two languages: 
+   Language                  | Language 
+   Python                    | JavaScript
+   SQL                       | Ruby
+
+Examples for subject and language: 
+    Subject                 | Language
+    Full Catalog            | HTML & CSS
+    Web Development         | Python
+    Programming             | JavaScript
+    Data Science            | Java
+    Partnerships            | SQL
+    Design                  | Bash/Shell
+
+AC 5
+
+Feature:
+    Checking if the selected filter can be unselected at https://www.codecademy.com/.
+
+Background:
+    Given there is a user that has access to https://www.codecademy.com/.
+    Two filtering categories are available.
+
+    By subject              | By language
+    Full Catalog            | HTML & CSS
+    Web Development         | Python
+    Programming             | JavaScript
+    Data Science            | Java
+    Partnerships            | SQL
+    Design                  | Bash/Shell
+                            | Ruby
+
+Scenario outline: 
+    When the website is open.
+    And I try to select <language> or <subject>
+    And I try to unselect it
+    Then the selected <language> or <subject> is still checked.
+
+Examples:
+        Language
+        HTML & CSS
+        Python
+        JavaScript
+        Java
+        SQL
+        Bash/Shell
+        Ruby
+
+AC 6 
+
+Feature:
+    Checking if the default selected filter is Web Development at https://www.codecademy.com/.
+
+Background:
+    Given there is a user that has access to https://www.codecademy.com/.
+    Two filtering categories are available.
+
+    By subject              | By language
+    Full Catalog            | HTML & CSS
+    Web Development         | Python
+    Programming             | JavaScript
+    Data Science            | Java
+    Partnerships            | SQL
+    Design                  | Bash/Shell
+                            | Ruby
+
+Scenario: Checking the default filter
+    When the website is open 
+    Then only the default category of the By subject filter is Web Development which is highlighted.
+
+
+
+Background:
+Given istnieje serwis Allegro.pl
+And istnieją <użytkownicy> z <dane> do logowania
+
+| użytkownicy | dane |
+| janusz@test.com | 123 |
+| test @test.com | 345 |
+| ktos @test.com | 678 |
+
+Scenario outline: Logowanie do serwisu Allegro.pl
+Given jestem na stronie allegro.pl
+When wypełniam formularz logowania poprzez wpisanie nazwy <uzytkownika> i <dane>
+
+Examples:
+| użytkownik | hasła |
+| janusz@test.com | 111 |
+| test @test.com | 111 |
+| ktos @test.com | 111 |
+
+
+And dostaję błąd autoryzacji
+When podaję <dane> jako hasło
+Then poprawnie zalogowuję się do serwisu
+
+
